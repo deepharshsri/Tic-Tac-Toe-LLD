@@ -1,5 +1,7 @@
 package com.deepansh.tic_tac_toe;
 
+import java.util.InputMismatchException;
+
 public class Board {
 
 
@@ -26,6 +28,10 @@ public class Board {
               }
               
            }
+           catch(InputMismatchException e){
+               System.out.println("Invalid input. Enter row and column for your move (0-2): ");
+               return false;
+           }  
            catch(ArrayIndexOutOfBoundsException e){
                System.out.println("Invalid input. Enter row and column for your move (0-2): ");
                return false;
@@ -34,6 +40,7 @@ public class Board {
                System.out.println(e.getMessage());
                return false;
            }
+             
   
     }
 

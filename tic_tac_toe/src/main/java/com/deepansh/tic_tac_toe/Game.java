@@ -1,6 +1,7 @@
 package com.deepansh.tic_tac_toe;
 
 import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Game {
@@ -49,18 +50,32 @@ public class Game {
     }
      
     public void makeMove(int row,int col) throws IOException,Exception{
-         System.out.println((currentPlayer)? "Player 1's turn": "Player 2's turn");
-         DrawBoard();
-            System.out.println("Enter row and column for your move (0-2): ");
+       
+        System.out.println((currentPlayer)? "Player 1's turn": "Player 2's turn");
+        DrawBoard();
+        System.out.println("Enter row and column for your move (0-2): ");
+        while(true){
+        try{
             int r=scanner.nextInt();
             int c=scanner.nextInt();
-            while(!board.isCellEmpty(r,c)){
+             while(!board.isCellEmpty(r,c)){
                 DrawBoard();
                 r=scanner.nextInt();
                 c=scanner.nextInt();
                
             }
             board.setUserAt(r,c,(currentPlayer)? player1:player2);
+            break;
+        }
+        catch(InputMismatchException e){
+            System.out.println("Invalid input. Enter row and column for your move (0-2): ");
+            scanner.nextLine();
+        }
+    }
+  
+        
+       
+        
             // winner=(winningStrategy.checkWinner(board)?(currentPlayer)? player1:player2:null);
         }
 
