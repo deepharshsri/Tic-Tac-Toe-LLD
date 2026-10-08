@@ -13,10 +13,10 @@ public class DefaultWinningStrategy  implements WinningStrategy{
     }
 
     @Override
-    public boolean checkWinner(Board board) {
+    public boolean checkWinner(Board board,WinningCombination winningCombination) {
      
-    List<List<Integer>> combinations=winningCombination.getDefaultWinningCombination().combinations;
-    Map<Integer, List<Integer>> winningCombinationMap=winningCombination.getDefaultWinningCombination().winningCombinationMap;
+    List<List<Integer>> combinations=winningCombination.combinations;
+    Map<Integer, List<Integer>> winningCombinationMap=winningCombination.winningCombinationMap;
     for(List<Integer> c:combinations){
         int a=c.get(0);
         int b=c.get(1);

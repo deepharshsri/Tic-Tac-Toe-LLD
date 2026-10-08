@@ -17,31 +17,15 @@ public class Board {
         cellsLeft--;
     }
     
-    public boolean isCellEmpty(int row,int col) throws Exception{
+    public boolean isCellEmpty(int row,int col){
        
-           try{
-              if(board[row][col]==null){
-                  return true;
-              }
-              else{
-                  throw new Exception("Cell is already occupied");
-              }
-              
-           }
-           catch(InputMismatchException e){
-               System.out.println("Invalid input. Enter row and column for your move (0-2): ");
-               return false;
-           }  
-           catch(ArrayIndexOutOfBoundsException e){
-               System.out.println("Invalid input. Enter row and column for your move (0-2): ");
-               return false;
-           }
-           catch(Exception e){
-               System.out.println(e.getMessage());
-               return false;
-           }
+           return board[row][col]==null;
              
   
+    }
+
+    public boolean isValidCell(int row,int col) {
+        return row>=0 && row<3 && col>=0 && col<3;
     }
 
     public boolean isBoardFull() {

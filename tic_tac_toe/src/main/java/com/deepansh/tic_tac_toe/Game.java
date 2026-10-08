@@ -12,7 +12,7 @@ public class Game {
     private GameStatus gameStatus= GameStatus.NOT_STARTED;
     private User winner;
     private WinningStrategy winningStrategy;
-    private Boolean currentPlayer;
+    private boolean currentPlayer;
     Scanner scanner=new Scanner(System.in);
 
     public Game(User player1, User player2, Board board, WinningStrategy winningStrategy) {
@@ -44,25 +44,27 @@ public class Game {
         setGameStatus(GameStatus.IN_PROGRESS);
     }
 
-    public void assignSymbols(Symbol symbol1,User player1){
+    public void assignSymbols(Symbol symbol1){
          player1.setUserSymbol(symbol1);
          player2.setUserSymbol((symbol1==Symbol.O)? Symbol.X :Symbol.O);
     }
      
-    public void makeMove(int row,int col) throws IOException,Exception{
+    public void makeMove() throws Exception{
        
         System.out.println((currentPlayer)? "Player 1's turn": "Player 2's turn");
-        DrawBoard();
+        drawBoard();
         System.out.println("Enter row and column for your move (0-2): ");
         while(true){
         try{
             int r=scanner.nextInt();
             int c=scanner.nextInt();
-             while(!board.isCellEmpty(r,c)){
-                DrawBoard();
-                r=scanner.nextInt();
-                c=scanner.nextInt();
-               
+            if(!board.isValidCell(r,c)){
+                System.out.println("Invalid cell. Enter row and column for your move (0-2): ");
+                continue;
+            }
+            if(!board.isCellEmpty(r,c)){
+                System.out.println("Cell is already occupied. Enter row and column for your move (0-2): ");
+                continue;
             }
             board.setUserAt(r,c,(currentPlayer)? player1:player2);
             break;
@@ -79,14 +81,14 @@ public class Game {
             // winner=(winningStrategy.checkWinner(board)?(currentPlayer)? player1:player2:null);
         }
 
-    public void checkGameStatus(boolean res){
+    public void updateGameStatus(boolean res){
             if(res){
                 winner=(currentPlayer)? player1:player2;
                 setGameStatus(GameStatus.WON);
 
             }
             else if(board.isBoardFull()){
-                setGameStatus(GameStatus.TIE);
+                setGameStatus(GameStatus.DRAW);
             }
             else{
                 updateTurn();
@@ -95,7 +97,7 @@ public class Game {
        
     }
 
-    public void DrawBoard() throws Exception{
+    public void drawBoard() throws Exception{
         System.out.println("Current Board:");
     for(int i=0;i<3;i++){
         for(int j=0;j<3;j++){
