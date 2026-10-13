@@ -13,11 +13,11 @@ public class TicTacToeApplication {
 		Board board=new Board();
 		WinningCombination winningCombination=new WinningCombination();
 		WinningCombination combination=winningCombination.getDefaultWinningCombination();
-		WinningStrategy winningStrategy=new DefaultWinningStrategy(winningCombination);
+		WinningStrategy winningStrategy=new DefaultWinningStrategy();
 		User user1=new User("1","Deepansh" );
 		User user2=new User("2","Deepak" );
 	
-		Game game=new Game(user1,user2,board,winningStrategy);
+		Game game=new Game(user1,user2,board);
 		game.assignSymbols(Symbol.X);
 		game.startGame();
 		while(game.getGameStatus()==GameStatus.IN_PROGRESS){
