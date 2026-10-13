@@ -16,17 +16,17 @@ public class DefaultWinningStrategy  implements WinningStrategy{
     public boolean checkWinner(Board board) {
      
     List<List<Integer>> combinations=winningCombination.combinations;
-    Map<Integer, List<Integer>> winningCombinationMap=winningCombination.winningCombinationMap;
-    for(List<Integer> c:combinations){
-        int a=c.get(0);
-        int b=c.get(1);
-        int d=c.get(2);
-        User user1=board.getUserAt(winningCombinationMap.get(b)
-                  .get(0),winningCombinationMap.get(b).get(1) );
-        User user2=board.getUserAt(winningCombinationMap.get(a)
-                  .get(0),winningCombinationMap.get(a).get(1) );
-        User user3=board.getUserAt(winningCombinationMap.get(d)
-                  .get(0),winningCombinationMap.get(d).get(1) );
+
+    for(int i=0;i<combinations.size();i++){
+        int row1=combinations.get(i).get(0)/3;
+        int col1=combinations.get(i).get(0)%3;
+        int row2=combinations.get(i).get(1)/3;
+        int col2=combinations.get(i).get(1)%3;
+        int row3=combinations.get(i).get(2)/3;
+        int col3=combinations.get(i).get(2)%3;  
+        User user1=board.getUserAt(row1,col1);
+        User user2=board.getUserAt(row2,col2);
+        User user3=board.getUserAt(row3,col3);
         if(user1!=null&&user1==user2&&user2==user3){
             return true;
         }
