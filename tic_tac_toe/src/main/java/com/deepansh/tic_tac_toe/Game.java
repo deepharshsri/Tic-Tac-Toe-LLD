@@ -1,6 +1,6 @@
 package com.deepansh.tic_tac_toe;
 
-
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -11,14 +11,15 @@ public class Game {
     private Board board;
     private GameStatus gameStatus= GameStatus.NOT_STARTED;
     private User winner;
+    private WinningStrategy winningStrategy;
     private boolean currentPlayer;
     Scanner scanner=new Scanner(System.in);
 
-    public Game(User player1, User player2, Board board) {
+    public Game(User player1, User player2, Board board, WinningStrategy winningStrategy) {
         this.player1 = player1;
         this.player2 = player2;
         this.board = board;
-        
+        this.winningStrategy = winningStrategy;
         this.currentPlayer=true;
     }
 
@@ -48,6 +49,10 @@ public class Game {
          player2.setUserSymbol((symbol1==Symbol.O)? Symbol.X :Symbol.O);
     }
      
+    public boolean updateTurnOrCheckWinner(){
+        return winningStrategy.checkWinner(board);
+    }
+
     public void makeMove() throws Exception{
        
         System.out.println((currentPlayer)? "Player 1's turn": "Player 2's turn");

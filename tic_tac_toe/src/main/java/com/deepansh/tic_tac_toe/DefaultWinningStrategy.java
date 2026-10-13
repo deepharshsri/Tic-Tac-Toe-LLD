@@ -5,11 +5,15 @@ import java.util.Map;
 
 public class DefaultWinningStrategy  implements WinningStrategy{
     
+    private  WinningCombination winningCombination;
 
-  
+    //constructor
+    public DefaultWinningStrategy(WinningCombination winningCombination) {
+        this.winningCombination = winningCombination;
+    }
 
     @Override
-    public boolean checkWinner(Board board,WinningCombination winningCombination) {
+    public boolean checkWinner(Board board) {
      
     List<List<Integer>> combinations=winningCombination.combinations;
     Map<Integer, List<Integer>> winningCombinationMap=winningCombination.winningCombinationMap;
