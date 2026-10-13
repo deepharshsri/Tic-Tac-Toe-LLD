@@ -34,7 +34,7 @@ Console based Tic Tac Toe game for two users using Strategy Pattern.
 3. Board has a `User[3][3]` grid.
 4. DefaultWinningStrategy implements WinningStrategy.
 5. DefaultWinningStrategy has-a WinningCombination.
-6. WinningStrategy uses a Board (method parameter in `checkWinner(Board)`), and returns a User.
+6. WinningStrategy uses a Board (method parameter in `checkWinner(Board)`), and returns a Boolean.
 
 ## Class Diagram
 <img width="2472" height="2438" alt="Blank diagram" src="https://github.com/user-attachments/assets/83bab7c9-80a9-4c37-930d-c1beb46a5fd2" />
